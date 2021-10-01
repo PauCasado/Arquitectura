@@ -52,7 +52,8 @@ public class Main {
 
 
 				CarreraRepository carrRepo = new CarreraRepositoryImpl(em);
-				carrRepo.create(car1);
+				carrRepo.create(car2);
+				
 
 				MatriculaRepository matRepo = new MatriculaRepositoryImpl(em);
 				matRepo.create(mat3);
@@ -71,7 +72,19 @@ public class Main {
 				List<Matricula> matriculas = new ArrayList<Matricula>();
 				matriculas=matRepo.getAll();
 				matriculas.forEach(e -> System.out.println(e));
+				
+				List<Carrera> carreras= new ArrayList<Carrera>();
+				carreras=carrRepo.getCantidadDeInscriptosPorCarrea();
+				carreras.forEach(c->System.out.println(c));
 
+				List<Carrera> matriculasOrdenadas = new ArrayList<Carrera>();
+				matriculasOrdenadas = carrRepo.getCantidadDeInscriptosPorCarrea();
+				matriculasOrdenadas.forEach(m->System.out.println(m));
+
+				List<Estudiante> estudiantesCarreraCiudad = new ArrayList<>();
+				estudiantesCarreraCiudad = estRepo.getPorCiudad(car3,"bolivar" );
+				estudiantesCarreraCiudad.forEach(e->System.out.println(e));
+				
 
 
 

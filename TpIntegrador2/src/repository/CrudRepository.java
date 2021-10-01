@@ -3,6 +3,9 @@ package repository;
 
 import java.util.List;
 
+import entities.Carrera;
+import entities.Estudiante;
+
 
 
 public interface CrudRepository<T> {
@@ -13,6 +16,7 @@ public interface CrudRepository<T> {
 
 		List<T> getAll();
 //		void initializer();
+	
 
 
 }

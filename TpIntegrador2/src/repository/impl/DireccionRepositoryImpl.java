@@ -10,6 +10,7 @@ import javax.persistence.PreRemove;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import entities.Carrera;
 import entities.Direccion;
 import entities.Estudiante;
 import repository.DireccionRepository;
@@ -141,5 +142,7 @@ public class DireccionRepositoryImpl implements DireccionRepository {
 				return id;
 
 		}
+
+		
 
 }

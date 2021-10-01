@@ -1,5 +1,6 @@
 package repository.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -73,6 +74,22 @@ public class CarreraRepositoryImpl implements CarreraRepository {
 				}
 				return id;
 		}
+		@SuppressWarnings("unchecked")
+		@Override
+		public List<Carrera> getCantidadDeInscriptosPorCarrea() {
+				List<Carrera> matriculas = new ArrayList<Carrera>();
+				try {
+						em.getTransaction().begin();
+						matriculas = em.createQuery("SELECT c FROM Matricula m JOIN m.carrera c WHERE m.fechaEgreso IS NULL GROUP BY m.carrera ORDER BY COUNT(m.estudiante) DESC")
+										.getResultList();
+						em.getTransaction().commit();
+				} catch (Exception e) {
+						e.printStackTrace();
+				}
+				return matriculas;
+		}
+		
+		
 
 
 

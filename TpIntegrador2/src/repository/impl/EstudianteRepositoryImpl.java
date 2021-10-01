@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 
+import entities.Carrera;
 import entities.Direccion;
 import entities.Estudiante;
 import repository.DireccionRepository;
@@ -162,6 +163,28 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 						return 0;
 				}
 				return id;
+
+		}
+		@SuppressWarnings("unchecked")
+		@Override
+		public List<Estudiante> getPorCiudad(Carrera c, String ciudad) {
+
+				CarreraRepositoryImpl repo = new CarreraRepositoryImpl(em);
+				c.setIdCarrera(repo.getId(c));
+				List<Estudiante> estudiantes = new ArrayList<Estudiante>();
+
+				try {
+						estudiantes = em.createQuery("SELECT m.estudiante FROM Matricula m JOIN m.estudiante  e JOIN e.direccion d WHERE d.ciudad = ?1"
+										+ "AND m.carrera =?2")
+										.setParameter(1, ciudad)
+										.setParameter(2, c)
+										.getResultList();
+				} catch (Exception e) {
+						System.out.println(e.getMessage());
+				}
+
+
+				return estudiantes;
 
 		}
 

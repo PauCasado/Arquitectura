@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import dto.ReporteCarrera;
 import entities.Carrera;
 import entities.Estudiante;
 import entities.Matricula;
@@ -113,6 +114,21 @@ public class MatriculaRepositoryImpl implements MatriculaRepository {
 			System.out.println("Fallo obtener matricula" + e.getMessage());
 		}
 		return m;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ReporteCarrera> reporteCarreras(){
+		List<ReporteCarrera> lista = new ArrayList<>();
+		
+		try {
+			lista = (List<ReporteCarrera>) em.createQuery("SELECT m FROM Matricula m WHERE GROUP BY ");
+
+		} catch (Exception e) {
+			System.out.println("Fallo obtener reporte de las carreras" + e.getMessage());
+		}
+		
+		return lista;
+		
 	}
 
 }
