@@ -22,7 +22,7 @@ public class Matricula {
 		@Column(nullable = false)
 		Date fechaIngreso;
 		@Column
-		Date fechaEgreso;
+		int fechaEgreso;
 
 		public Matricula() {
 				super();
@@ -35,7 +35,7 @@ public class Matricula {
 				this.carrera = carrera;
 				long miliseconds = System.currentTimeMillis();
 				this.fechaIngreso = new Date(miliseconds);
-				this.fechaEgreso = null;
+				this.fechaEgreso = 0;
 		}
 
 		public Estudiante getEstudiante() {
@@ -56,10 +56,10 @@ public class Matricula {
 		public void setFechaIngreso(Date fechaIngreso) {
 				this.fechaIngreso = fechaIngreso;
 		}
-		public Date getFechaEgreso() {
+		public int getFechaEgreso() {
 				return fechaEgreso;
 		}
-		public void setFechaEgreso(Date fechaEgreso) {
+		public void setFechaEgreso(int fechaEgreso) {
 				this.fechaEgreso = fechaEgreso;
 		}
 

@@ -1,5 +1,9 @@
 package dto;
 
+import java.sql.Date;
+
+import entities.Carrera;
+
 public class ReporteCarrera {
 
 	private int idCarrera;
@@ -12,9 +16,9 @@ public class ReporteCarrera {
 		super();
 	}
 
-	public ReporteCarrera(int idCarrera, String nombreCarrera, int anio, Long egresados, Long inscriptos) {
+	public ReporteCarrera(Carrera idCarrera, String nombreCarrera, int anio, Long inscriptos, Long egresados) {
 		super();
-		this.idCarrera = idCarrera;
+		this.idCarrera = idCarrera.getIdCarrera();
 		this.nombreCarrera = nombreCarrera;
 		this.anio = anio;
 		this.egresados = egresados;

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-
 import dto.ReporteCarrera;
 import entities.Carrera;
 import entities.Estudiante;
@@ -78,7 +77,7 @@ public class MatriculaRepositoryImpl implements MatriculaRepository {
 	@Override
 	public void update(Matricula matricula, int idEstudiante, int idCarrera) {
 		
-		Date fechaE = matricula.getFechaEgreso();
+		int fechaE = matricula.getFechaEgreso();
 
 		Estudiante es = em.find(Estudiante.class, idEstudiante);
 
@@ -116,12 +115,12 @@ public class MatriculaRepositoryImpl implements MatriculaRepository {
 		return m;
 	}
 	
-	@SuppressWarnings("unchecked")
+	
 	public List<ReporteCarrera> reporteCarreras(){
 		List<ReporteCarrera> lista = new ArrayList<>();
 		
 		try {
-			lista = (List<ReporteCarrera>) em.createQuery("SELECT m FROM Matricula m WHERE GROUP BY ");
+			lista = em.createQuery("SELECT new dto.ReporteCarrera(m.carrera,c.nombre,YEAR(m.fechaIngreso),COUNT(m.estudiante),SUM(m.fechaEgreso)) FROM Matricula m JOIN m.carrera c GROUP BY (m.carrera),YEAR(m.fechaIngreso) ORDER BY YEAR(m.fechaIngreso)", ReporteCarrera.class).getResultList();
 
 		} catch (Exception e) {
 			System.out.println("Fallo obtener reporte de las carreras" + e.getMessage());
